@@ -1,2 +1,28 @@
 # ThreadlessC
-Threadless Injection (originally from CCob) ported to C
+Threadless Injection (originally from CCob) ported to C.
+
+## Added features
+- Target process PID retrieved via name comparison and integrity check
+- Payload is retrieved from URL and decrypted using AES
+- Replaced a few calls to use Syswhispers3  
+
+Use the `bin2aes.py` script to encrypt your payload.
+```
+PS D:\> python .\bin2aes.py .\calc.bin
+AESkey[] = { 0x10, 0x56, 0x7a, 0x12, 0x53, 0x29, 0xa9, 0x35, 0x7, 0x4b, 0x87, 0x20, 0x35, 0x42, 0xd1, 0x9e };
+Shellcode in hex bytes format:
+payload[] = {
+    0x8E, 0x84, 0xC6, 0x35, 0xBF, 0xC8, 0xD6, 0x2D, 0x46, 0x5D, 0x34, 0x1F, 0x28, 0xEF, 0x52, 0xD4,
+    0x22, 0x63, 0x1D, 0xF6, 0x51, 0x86, 0xED, 0x85, 0x31, 0x5C, 0xE6, 0xFE, 0x8F, 0xD6, 0x12, 0xEF,
+    ...
+    0x61, 0x65, 0x0F, 0x81, 0x8E, 0x10, 0x2E, 0x7B, 0x04, 0x71, 0x59, 0xE4, 0x96, 0x9D, 0xC9, 0xFD
+};
+[+] Saved encrypted file as payload.bin
+```
+Update the `key` with the `AESkey` above. 
+
+# Credits
+Original Threadless Injection: https://github.com/CCob/ThreadlessInject  
+GetPID & getIntegrityLevel   : https://captmeelo.com/redteam/maldev/2021/11/22/picky-ppid-spoofing.html  
+AESDecrypt                   : reenz0h @SEKTOR7net  
+Syscalls via SysWhispers3    : https://github.com/klezVirus/SysWhispers3  
